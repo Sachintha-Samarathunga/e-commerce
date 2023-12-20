@@ -1,3 +1,13 @@
+# E-commerce Web App With an Admin Panel
+
+![ss01](https://github.com/Sachintha-Samarathunga/e-commerce/assets/98406068/088dc96d-6b2f-484b-95ba-2949f751c6b3)
+![ss02](https://github.com/Sachintha-Samarathunga/e-commerce/assets/98406068/792459b0-ee85-44c0-a8ce-26eabd0386da)
+![ss03](https://github.com/Sachintha-Samarathunga/e-commerce/assets/98406068/7212b7ea-ec9c-4bc7-aaa9-5c9a2a395fad)
+![ss04](https://github.com/Sachintha-Samarathunga/e-commerce/assets/98406068/68e2f678-e7d4-4230-b057-742d82b9d209)
+![ss05](https://github.com/Sachintha-Samarathunga/e-commerce/assets/98406068/6880bfea-457b-42a5-bcd1-e3c41f92baae)
+![ss06](https://github.com/Sachintha-Samarathunga/e-commerce/assets/98406068/a57a6ce6-8a74-4315-916a-493b5e659b0b)
+
+
 # Payload E-Commerce Template
 
 This is the official [Payload E-Commerce Template](https://github.com/payloadcms/payload/blob/main/templates/ecommerce). Use it to power e-commerce businesses and online stores of all sizes. This repo includes a fully-working backend, enterprise-grade admin panel, and a beautifully designed, production-ready website.
