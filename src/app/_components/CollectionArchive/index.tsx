@@ -9,6 +9,7 @@ import { Card } from '../Card'
 import { Gutter } from '../Gutter'
 import { PageRange } from '../PageRange'
 import { Pagination } from '../Pagination'
+import { useFilter } from '../../_providers/Filter'
 
 import classes from './index.module.scss'
 
@@ -37,16 +38,17 @@ export type Props = {
 }
 
 export const CollectionArchive: React.FC<Props> = props => {
+ 
+  const { categoryFilters, sort } = useFilter()
+
   const {
     className,
     relationTo,
     showPageRange,
     onResultChange,
-    sort = '-createdAt',
     limit = 10,
     populatedDocs,
     populatedDocsTotal,
-    categories: catsFromProps,
   } = props
 
   const [results, setResults] = useState<Result>({
@@ -95,13 +97,13 @@ export const CollectionArchive: React.FC<Props> = props => {
       {
         sort,
         where: {
-          ...(catsFromProps && catsFromProps?.length > 0
+          ...(categoryFilters && categoryFilters?.length > 0
             ? {
                 categories: {
                   in:
-                    typeof catsFromProps === 'string'
-                      ? [catsFromProps]
-                      : catsFromProps.map(cat => cat.id).join(','),
+                    typeof categoryFilters === 'string'
+                      ? [categoryFilters]
+                      : categoryFilters.map((cat: string) => cat).join(','),
                 },
               }
             : {}),
@@ -143,15 +145,14 @@ export const CollectionArchive: React.FC<Props> = props => {
     return () => {
       if (timer) clearTimeout(timer)
     }
-  }, [page, catsFromProps, relationTo, onResultChange, sort, limit])
+  }, [page, categoryFilters, relationTo, onResultChange, sort, limit])
 
   return (
     <div className={[classes.collectionArchive, className].filter(Boolean).join(' ')}>
       <div ref={scrollRef} className={classes.scrollRef} />
-      {!isLoading && error && <Gutter>{error}</Gutter>}
+      {!isLoading && error && <div>{error}</div>}
       <Fragment>
         {showPageRange !== false && (
-          <Gutter>
             <div className={classes.pageRange}>
               <PageRange
                 totalDocs={results.totalDocs}
@@ -160,15 +161,11 @@ export const CollectionArchive: React.FC<Props> = props => {
                 limit={limit}
               />
             </div>
-          </Gutter>
         )}
-        <Gutter>
           <div className={classes.grid}>
             {results.docs?.map((result, index) => {
               return (
-                <div key={index} className={classes.column}>
-                  <Card relationTo="products" doc={result} showCategories />
-                </div>
+                <Card relationTo="products" doc={result} showCategories />
               )
             })}
           </div>
@@ -180,7 +177,6 @@ export const CollectionArchive: React.FC<Props> = props => {
               onClick={setPage}
             />
           )}
-        </Gutter>
       </Fragment>
     </div>
   )
